@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 
 import Layout from '@/components/layout';
 import AnswerBox from '@/components/AnswerBox';
+import openAiController from '@/controller/openAiControlloer';
 
 import styled from 'styled-components';
 
@@ -10,6 +11,8 @@ export default function Home() {
 	const [inputValue, setInputValue] = useState('');
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+	const [answerArray, setAnswerArray] = useState<Array<string>>([]);
 
 	const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setInputValue(e.target.value);
@@ -22,11 +25,20 @@ export default function Home() {
 			buttonRef.current.click();
 		}
 	};
-	const buttonHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const buttonHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		if (textAreaRef.current) {
-			setInputValue('');
-			textAreaRef.current.focus();
+		try {
+			if (textAreaRef.current) {
+				const {
+					answer: { content },
+				} = await openAiController({ content: inputValue });
+				setAnswerArray(prev => [...prev, content]);
+				setInputValue('');
+				textAreaRef.current.focus();
+			}
+		} catch (err) {
+			console.error(err);
+			alert('요청이 밀렸습니다.!! 잠시후 다시 요청하세요!!');
 		}
 	};
 
@@ -48,7 +60,7 @@ export default function Home() {
 							전송
 						</Button>
 					</Form>
-					<AnswerBox />
+					<AnswerBox answerArray={answerArray} />
 				</Main>
 			</Layout>
 		</>
@@ -60,6 +72,7 @@ const Main = styled.main`
 	flex-direction: column-reverse;
 	align-items: center;
 	height: 100vh;
+	background: #434654;
 `;
 
 const Form = styled.form`
@@ -74,7 +87,13 @@ const TextArea = styled.textarea`
 	width: 80%;
 	height: 50px;
 	padding: 10px;
+	color: white;
+	background: #353640;
 	resize: none;
+	border: none;
+	:focus {
+		outline: none;
+	}
 `;
 
 const Button = styled.button``;
