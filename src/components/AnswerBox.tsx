@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 interface TAnswerBoxProps {
@@ -5,8 +6,14 @@ interface TAnswerBoxProps {
 }
 
 export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
+	const containerRef = useRef<HTMLElement>(null);
+	useEffect(() => {
+		if (containerRef.current) {
+			containerRef.current.scrollTop = containerRef.current.scrollHeight;
+		}
+	}, [answerArray]);
 	return (
-		<Container>
+		<Container ref={containerRef}>
 			{answerArray.map((answer, index) => (
 				<Div key={index}>{answer}</Div>
 			))}
