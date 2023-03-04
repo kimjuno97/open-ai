@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -6,7 +7,12 @@ export default function navbar() {
 	return (
 		<NavBar>
 			<ChatButton>
-				<PlusIcon>➕</PlusIcon>
+				<PlusIcon
+					src='./btnPlus.svg'
+					alt='plus'
+					width={15}
+					height={15}
+				/>
 				<div>New Chat</div>
 			</ChatButton>
 		</NavBar>
@@ -23,6 +29,7 @@ const NavBar = styled.nav`
 
 const ChatButton = styled.button`
 	display: flex;
+	justify-content: center;
 	padding: 7px 15px;
 	background: none;
 	border: 0.5px solid gray;
@@ -31,8 +38,9 @@ const ChatButton = styled.button`
 	&:hover {
 		background: #2b2c2f;
 	}
+	color: white;
 `;
 
-const PlusIcon = styled.div`
-	padding-right: 10px;
+const PlusIcon = styled(Image)`
+	margin-right: 10px;
 `;
