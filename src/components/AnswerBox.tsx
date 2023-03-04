@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { CodeBlock } from './CodeBlock';
+import { TchatProperty } from '@/controller/openAiControlloer';
 
 interface TAnswerBoxProps {
-	answerArray: Array<string>;
+	answerArray: TchatProperty[];
 }
 
 export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
@@ -12,10 +14,18 @@ export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
 			containerRef.current.scrollTop = containerRef.current.scrollHeight;
 		}
 	}, [answerArray]);
+	const code = `function greet(name) {
+        console.log('Hello, ' + name + '!');
+      }`;
 	return (
 		<Container ref={containerRef}>
-			{answerArray.map((answer, index) => (
-				<Div key={index}>{answer}</Div>
+			<CodeBlock
+				language='javascript'
+				value={code}
+			/>
+
+			{answerArray.map(({ content }, index) => (
+				<Div key={index}>{content}</Div>
 			))}
 		</Container>
 	);
@@ -32,14 +42,14 @@ const Container = styled.section`
 
 	div:nth-child(even) {
 		width: 100%;
-		padding: 10px;
+		padding: 10% 15%;
 		background: #434654;
 		text-align: center;
 	}
 
 	div:nth-child(odd) {
 		width: 100%;
-		padding: 10px;
+		padding: 10% 15%;
 		background: #343541;
 		text-align: center;
 	}

@@ -3,7 +3,9 @@ import React, { useRef, useState } from 'react';
 
 import Layout from '@/components/layout';
 import AnswerBox from '@/components/AnswerBox';
-import openAiController from '@/controller/openAiControlloer';
+import openAiController, {
+	TchatProperty,
+} from '@/controller/openAiControlloer';
 
 import styled from 'styled-components';
 
@@ -12,7 +14,7 @@ export default function Home() {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-	const [answerArray, setAnswerArray] = useState<Array<string>>([]);
+	const [answerArray, setAnswerArray] = useState<TchatProperty[]>([]);
 
 	const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setInputValue(e.target.value);
@@ -29,10 +31,8 @@ export default function Home() {
 		e.preventDefault();
 		try {
 			if (textAreaRef.current) {
-				const {
-					answer: { content },
-				} = await openAiController({ content: inputValue });
-				setAnswerArray(prev => [...prev, content]);
+				const { answer } = await openAiController({ content: inputValue });
+				setAnswerArray(prev => [...prev, answer]);
 				setInputValue('');
 				textAreaRef.current.focus();
 			}
