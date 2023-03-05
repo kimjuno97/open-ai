@@ -6,6 +6,7 @@ import AnswerBox from '@/components/AnswerBox';
 import openAiController, {
 	TchatProperty,
 } from '@/controller/openAiControlloer';
+import Spiner from '@/components/Spiner';
 
 import styled from 'styled-components';
 
@@ -21,8 +22,10 @@ export default function Home() {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const [answerArray, setAnswerArray] = useState<TchatProperty[]>([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		if (isLoading) return;
 		setInputValue(e.target.value);
 	};
 
@@ -42,9 +45,9 @@ export default function Home() {
 					...trimmedArr,
 					{ role: 'user', content: inputValue },
 				];
-
+				setIsLoading(true);
 				const { answer } = await openAiController({ messages });
-
+				setIsLoading(false);
 				setAnswerArray(prev => [
 					...prev,
 					{ role: 'user', content: inputValue },
@@ -74,8 +77,9 @@ export default function Home() {
 						/>
 						<Button
 							onClick={buttonHandler}
-							ref={buttonRef}>
-							전송
+							ref={buttonRef}
+							disabled={isLoading}>
+							{isLoading ? <Spiner /> : '전송'}
 						</Button>
 					</Form>
 					<AnswerBox answerArray={answerArray} />
@@ -127,5 +131,8 @@ const Button = styled.button`
 	:focus,
 	:hover {
 		background: #202123;
+	}
+	:disabled {
+		cursor: no-drop;
 	}
 `;
