@@ -9,33 +9,52 @@ import openAiController, {
 
 import styled from 'styled-components';
 
+/**
+ * 해야할것들
+ * 2. code block 완성하기
+ * 3. 로딩 처리하기
+ * 4. 광고 달기
+ */
+
 export default function Home() {
 	const [inputValue, setInputValue] = useState('');
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
 	const [answerArray, setAnswerArray] = useState<TchatProperty[]>([]);
 
 	const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setInputValue(e.target.value);
 	};
 
-	const submitHandler = (e: React.KeyboardEvent) => {
-		// 조건 shift가 안눌리고 enter를 누를시
-		if (e.key === 'Enter' && !e.shiftKey && buttonRef.current) {
-			e.preventDefault();
-			buttonRef.current.click();
-		}
-	};
 	const buttonHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		try {
-			if (textAreaRef.current) {
-				const { answer } = await openAiController({ content: inputValue });
-				setAnswerArray(prev => [...prev, answer]);
+			if (!textAreaRef.current) return;
+			/** 공백 및 엔터 검사 */
+			const trimInputValue = inputValue.trim().replace(/\n/g, '');
+			if (!!trimInputValue) {
+				const trimmedArr = answerArray.slice(-10);
+				/**
+				 * 요청할 message 생성.
+				 * 대화형을 유지하기 위해 전에 주고 받은 내용도 전달해 줘야 함.
+				 */
+				const messages: TchatProperty[] = [
+					...trimmedArr,
+					{ role: 'user', content: inputValue },
+				];
+
+				const { answer } = await openAiController({ messages });
+
+				setAnswerArray(prev => [
+					...prev,
+					{ role: 'user', content: inputValue },
+					answer,
+				]);
 				setInputValue('');
-				textAreaRef.current.focus();
+			} else {
+				setInputValue(trimInputValue);
 			}
+			textAreaRef.current.focus();
 		} catch (err) {
 			console.error(err);
 			alert('요청이 밀렸습니다.!! 잠시후 다시 요청하세요!!');
@@ -51,7 +70,6 @@ export default function Home() {
 							ref={textAreaRef}
 							value={inputValue}
 							onChange={inputHandler}
-							onKeyDown={submitHandler}
 							autoFocus
 						/>
 						<Button

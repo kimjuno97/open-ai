@@ -1,12 +1,8 @@
 import client from './axios';
 
-interface TopenAiRequest {
-	content: string;
-}
-
 export interface TchatProperty {
-	content: string;
 	role: 'system' | 'user' | 'assistant';
+	content: string;
 }
 
 interface TopenAiRespose {
@@ -14,12 +10,14 @@ interface TopenAiRespose {
 }
 
 const openAiController = async ({
-	content,
-}: TopenAiRequest): Promise<TopenAiRespose> => {
+	messages,
+}: {
+	messages: TchatProperty[];
+}): Promise<TopenAiRespose> => {
 	const { data }: { data: TopenAiRespose } = await client.post('/', {
-		content,
+		messages,
 	});
-	console.log('response 확인', data);
+
 	return data;
 };
 export default openAiController;
