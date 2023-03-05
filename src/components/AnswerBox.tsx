@@ -14,21 +14,36 @@ export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
 			containerRef.current.scrollTop = containerRef.current.scrollHeight;
 		}
 	}, [answerArray]);
-	const code = `function greet(name) {
-        console.log('Hello, ' + name + '!');
-      }`;
+
 	return (
 		<Container ref={containerRef}>
-			<CodeBlock
-				language='javascript'
-				value={code}
-			/>
-
-			{answerArray.map(({ role, content }, index) => (
-				<Div key={index}>{`${
-					role === 'user' ? 'QUESTION' : 'AI'
-				} : ${content}`}</Div>
-			))}
+			{answerArray.map(({ role, content }, index) => {
+				if (content.includes('```')) {
+					const regex = /```[\s\S]*?```/gm;
+					const code: Array<string> = content.match(regex) || [];
+					const stringContent = content.replace(regex, '');
+					return (
+						<Div key={index}>
+							{stringContent}
+							{code.map((str, idx) => {
+								const codeStr = str.split('```')[1];
+								return (
+									<CodeBlock
+										key={idx}
+										language='javascript'
+										value={codeStr}
+									/>
+								);
+							})}
+						</Div>
+					);
+				}
+				return (
+					<Div key={index}>{`${
+						role === 'user' ? 'QUESTION' : 'AI'
+					} : ${content}`}</Div>
+				);
+			})}
 		</Container>
 	);
 }

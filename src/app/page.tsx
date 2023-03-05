@@ -96,6 +96,7 @@ const Main = styled.main`
 const Form = styled.form`
 	display: flex;
 	justify-content: center;
+	gap: 5px;
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 10px;
@@ -107,6 +108,7 @@ const TextArea = styled.textarea`
 	padding: 10px;
 	color: white;
 	background: #353640;
+	border-radius: 5px;
 	resize: none;
 	border: none;
 	:focus {
@@ -114,4 +116,16 @@ const TextArea = styled.textarea`
 	}
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	background: #353640;
+	outline: none;
+	:focus,
+	:hover {
+		background: #202123;
+	}
+`;
