@@ -14,7 +14,7 @@ const openAiController = async ({
 }: {
 	messages: TchatProperty[];
 }): Promise<TopenAiRespose> => {
-	const { data }: { data: TopenAiRespose } = await client.post('/', {
+	const { data }: { data: TopenAiRespose } = await client.post('', {
 		messages,
 	});
 
