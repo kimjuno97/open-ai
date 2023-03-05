@@ -61,6 +61,7 @@ export default function Home() {
 		} catch (err) {
 			console.error(err);
 			alert('요청이 밀렸습니다.!! 잠시후 다시 요청하세요!!');
+			setIsLoading(false);
 		}
 	};
 
