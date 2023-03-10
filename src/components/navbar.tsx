@@ -1,10 +1,19 @@
+'use client';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-export default function navbar() {
+export default function Navbar() {
+	const router = useRouter();
+
+	const routerHandler = (path: string) => () => {
+		router.push(path);
+	};
 	return (
 		<NavBar>
-			<ChatButton>
+			<ChatButton onClick={routerHandler('/chat')}>CHAT MODEL</ChatButton>
+			<ChatButton onClick={routerHandler('/image')}>IMAGE MODEL</ChatButton>
+			{/* <ChatButton>
 				<PlusIcon
 					src='./btnPlus.svg'
 					alt='plus'
@@ -12,7 +21,7 @@ export default function navbar() {
 					height={15}
 				/>
 				<div>New Chat</div>
-			</ChatButton>
+			</ChatButton> */}
 		</NavBar>
 	);
 }
@@ -20,7 +29,8 @@ export default function navbar() {
 const NavBar = styled.nav`
 	display: flex;
 	flex-direction: column;
-	width: 30vw;
+	gap: 1rem;
+	width: 25vw;
 	padding: 10px;
 	background: #202123;
 `;
