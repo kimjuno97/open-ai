@@ -1,4 +1,3 @@
-'use client';
 import Navbar from './navbar';
 
 import styled from 'styled-components';
