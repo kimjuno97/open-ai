@@ -9,8 +9,6 @@ import useChat from './chat/useChat';
 
 /**
  * 해야할것들
- * 2. code block 완성하기
- * 3. 로딩 처리하기
  * 4. 광고 달기
  */
 
