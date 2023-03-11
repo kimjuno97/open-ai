@@ -1,8 +1,7 @@
 'use client';
 import React, { useRef, useState } from 'react';
-import openAiController, {
-	TchatProperty,
-} from '@/controller/openAiControlloer';
+import chatController, { TchatProperty } from '@/controller/chatControlloer';
+import blankValidation from '../utills/blankValidation';
 
 export default function useChat() {
 	const [inputValue, setInputValue] = useState('');
@@ -20,9 +19,8 @@ export default function useChat() {
 		e.preventDefault();
 		try {
 			if (!textAreaRef.current) return;
-			/** 공백 및 엔터 검사 */
-			const trimInputValue = inputValue.trim().replace(/\n/g, '');
-			if (!!trimInputValue) {
+			const { availdValue, validation } = blankValidation(inputValue);
+			if (validation) {
 				const trimmedArr = answerArray.slice(-10);
 				/**
 				 * 요청할 message 생성.
@@ -33,7 +31,7 @@ export default function useChat() {
 					{ role: 'user', content: inputValue },
 				];
 				setIsLoading(true);
-				const { answer } = await openAiController({ messages });
+				const { answer } = await chatController({ messages });
 				setIsLoading(false);
 				setAnswerArray(prev => [
 					...prev,
@@ -42,7 +40,7 @@ export default function useChat() {
 				]);
 				setInputValue('');
 			} else {
-				setInputValue(trimInputValue);
+				setInputValue(availdValue);
 			}
 			textAreaRef.current.focus();
 		} catch (err) {

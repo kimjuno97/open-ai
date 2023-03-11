@@ -9,15 +9,15 @@ interface TopenAiRespose {
 	answer: TchatProperty;
 }
 
-const openAiController = async ({
+const chatController = async ({
 	messages,
 }: {
 	messages: TchatProperty[];
 }): Promise<TopenAiRespose> => {
-	const { data }: { data: TopenAiRespose } = await client.post('', {
+	const { data }: { data: TopenAiRespose } = await client.post('/chat', {
 		messages,
 	});
 
 	return data;
 };
-export default openAiController;
+export default chatController;
