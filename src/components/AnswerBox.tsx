@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { CodeBlock } from './CodeBlock';
-import { TchatProperty } from '@/controller/openAiControlloer';
+import { TchatProperty } from '@/controller/chatControlloer';
 
 interface TAnswerBoxProps {
 	answerArray: TchatProperty[];
@@ -14,6 +14,8 @@ export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
 			containerRef.current.scrollTop = containerRef.current.scrollHeight;
 		}
 	}, [answerArray]);
+
+	if (answerArray.length === 0) return null;
 
 	return (
 		<Container ref={containerRef}>

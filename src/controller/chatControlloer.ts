@@ -5,7 +5,7 @@ export interface TchatProperty {
 	content: string;
 }
 
-interface TopenAiRespose {
+interface TChatRespose {
 	answer: TchatProperty;
 }
 
@@ -13,8 +13,8 @@ const chatController = async ({
 	messages,
 }: {
 	messages: TchatProperty[];
-}): Promise<TopenAiRespose> => {
-	const { data }: { data: TopenAiRespose } = await client.post('/chat', {
+}): Promise<TChatRespose> => {
+	const { data }: { data: TChatRespose } = await client.post('/chat', {
 		messages,
 	});
 
