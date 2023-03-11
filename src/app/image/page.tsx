@@ -78,7 +78,7 @@ export default function Page() {
 					value={numberValue}
 					onChange={numberInputHandler}
 					min={1}
-					max={6}
+					max={2}
 				/>
 			</OptionsContainer>
 			<ImageBox imageArray={imageArray} />
