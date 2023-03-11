@@ -24,6 +24,35 @@ export default function useImage() {
 		setInputValue(e.target.value);
 	};
 
+	const enterHandler = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.shiftKey) return;
+		if (e.key === 'Enter') {
+			try {
+				if (!textAreaRef.current) return;
+				const { availdValue, validation } = blankValidation(inputValue);
+				if (validation) {
+					setIsLoading(true);
+
+					const { answer } = await imageController({
+						prompt: inputValue,
+						n: numberValue,
+						size: radioValue,
+					});
+					setIsLoading(false);
+					setImageArray(prev => [...prev, ...answer]);
+					setInputValue('');
+				} else {
+					setInputValue(availdValue);
+				}
+				textAreaRef.current.focus();
+			} catch (err) {
+				console.error(err);
+				alert('요청이 밀렸습니다.!! 잠시후 다시 요청하세요!!');
+				setIsLoading(false);
+			}
+		}
+	};
+
 	const radioHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetValue = e.target.value;
 
@@ -47,7 +76,7 @@ export default function useImage() {
 			const { availdValue, validation } = blankValidation(inputValue);
 			if (validation) {
 				setIsLoading(true);
-				console.log('요청 input value', inputValue);
+
 				const { answer } = await imageController({
 					prompt: inputValue,
 					n: numberValue,
@@ -84,5 +113,6 @@ export default function useImage() {
 		numberValue,
 		numberInputHandler,
 		imageArray,
+		enterHandler,
 	};
 }

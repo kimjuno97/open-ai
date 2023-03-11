@@ -19,6 +19,7 @@ export default function Page() {
 		numberValue,
 		numberInputHandler,
 		imageArray,
+		enterHandler,
 	} = useImage();
 
 	return (
@@ -28,6 +29,7 @@ export default function Page() {
 					ref={textAreaRef}
 					value={inputValue}
 					onChange={inputHandler}
+					onKeyDown={enterHandler}
 					autoFocus
 				/>
 				<Button
@@ -84,7 +86,7 @@ export default function Page() {
 	);
 }
 
-const Form = styled.form`
+const Form = styled.div`
 	display: flex;
 	justify-content: center;
 	gap: 5px;

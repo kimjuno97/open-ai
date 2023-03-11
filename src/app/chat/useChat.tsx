@@ -15,6 +15,39 @@ export default function useChat() {
 		setInputValue(e.target.value);
 	};
 
+	const enterHandler = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.shiftKey) return;
+		if (e.key === 'Enter') {
+			try {
+				if (!textAreaRef.current) return;
+				const { availdValue, validation } = blankValidation(inputValue);
+				if (validation) {
+					const trimmedArr = answerArray.slice(-10);
+					const messages: TchatProperty[] = [
+						...trimmedArr,
+						{ role: 'user', content: inputValue },
+					];
+					setIsLoading(true);
+					const { answer } = await chatController({ messages });
+					setIsLoading(false);
+					setAnswerArray(prev => [
+						...prev,
+						{ role: 'user', content: inputValue },
+						answer,
+					]);
+					setInputValue('');
+				} else {
+					setInputValue(availdValue);
+				}
+				textAreaRef.current.focus();
+			} catch (err) {
+				console.error(err);
+				alert('요청이 밀렸습니다.!! 잠시후 다시 요청하세요!!');
+				setIsLoading(false);
+			}
+		}
+	};
+
 	const buttonHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		try {
@@ -57,5 +90,6 @@ export default function useChat() {
 		buttonRef,
 		isLoading,
 		answerArray,
+		enterHandler,
 	};
 }
