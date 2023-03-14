@@ -1,11 +1,10 @@
 'use client';
 import styled from 'styled-components';
 
-import Layout from '@/components/layout';
-import AnswerBox from '@/components/AnswerBox';
-import Spiner from '@/components/Spiner';
-
-import useChat from './chat/useChat';
+import Image from 'next/image';
+import chat from '../../public/chat.svg';
+import image from '../../public/image.svg';
+import { useRouter } from 'next/navigation';
 
 /**
  * 해야할것들
@@ -13,75 +12,63 @@ import useChat from './chat/useChat';
  */
 
 export default function Home() {
-	const {
-		textAreaRef,
-		inputValue,
-		inputHandler,
-		buttonHandler,
-		buttonRef,
-		isLoading,
-		answerArray,
-	} = useChat();
+	const router = useRouter();
 
+	const routerHandler = (path: string) => () => {
+		router.push(path);
+	};
 	return (
-		<>
-			<Layout>
-				<Form>
-					<TextArea
-						ref={textAreaRef}
-						value={inputValue}
-						onChange={inputHandler}
-						autoFocus
+		<Container>
+			<ImageContainer>
+				<ImageBox onClick={routerHandler('/chat')}>
+					<Image
+						src={chat}
+						alt='chat'
 					/>
-					<Button
-						onClick={buttonHandler}
-						ref={buttonRef}
-						disabled={isLoading}>
-						{isLoading ? <Spiner /> : '전송'}
-					</Button>
-				</Form>
-				<AnswerBox answerArray={answerArray} />
-			</Layout>
-		</>
+					<P>gpt-3.5 Turbo</P>
+				</ImageBox>
+				<ImageBox onClick={routerHandler('/image')}>
+					<Image
+						src={image}
+						alt='image'
+					/>
+					<P>Image generation</P>
+				</ImageBox>
+			</ImageContainer>
+		</Container>
 	);
 }
 
-const Form = styled.form`
+const Container = styled.div`
 	display: flex;
 	justify-content: center;
-	gap: 5px;
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 10px;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: #434655;
 `;
 
-const TextArea = styled.textarea`
-	width: 80%;
-	height: 50px;
-	padding: 10px;
-	color: white;
-	background: #353640;
-	border-radius: 5px;
-	resize: none;
-	border: none;
-	:focus {
-		outline: none;
-	}
+const ImageContainer = styled.div`
+	display: flex;
+	gap: 50px;
 `;
 
-const Button = styled.button`
-	border-radius: 5px;
+const ImageBox = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 300px;
+	height: 300px;
+	background: #777a8a;
+	border-radius: 50%;
+	transition: 1.2s;
 	cursor: pointer;
-	border: none;
-	color: white;
-	padding: 5px 10px;
-	background: #353640;
-	outline: none;
-	:focus,
 	:hover {
-		background: #202123;
+		transform: scale(120%, 120%);
 	}
-	:disabled {
-		cursor: no-drop;
-	}
+`;
+
+const P = styled.p`
+	font-size: 20px;
 `;
