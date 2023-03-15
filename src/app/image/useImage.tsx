@@ -28,7 +28,7 @@ export default function useImage() {
 		if (e.shiftKey) return;
 		if (e.key === 'Enter') {
 			try {
-				if (!textAreaRef.current) return;
+				if (!textAreaRef.current || isLoading) return;
 				const { availdValue, validation } = blankValidation(inputValue);
 				if (validation) {
 					setIsLoading(true);
