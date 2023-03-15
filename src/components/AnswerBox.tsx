@@ -20,6 +20,7 @@ export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
 	return (
 		<Container ref={containerRef}>
 			{answerArray.map(({ role, content }, index) => {
+				const contentArr = content.split(/[.?]/).join('\n');
 				if (content.includes('```')) {
 					const regex = /```[\s\S]*?```/gm;
 					const code: Array<string> = content.match(regex) || [];
@@ -41,9 +42,9 @@ export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
 					);
 				}
 				return (
-					<Div key={index}>{`${
-						role === 'user' ? 'QUESTION' : 'AI'
-					} : ${content}`}</Div>
+					<Div key={index}>
+						{`${role === 'user' ? 'QUESTION' : 'AI'} : ${contentArr}`}
+					</Div>
 				);
 			})}
 		</Container>
@@ -86,4 +87,6 @@ const Container = styled.div`
 	}
 `;
 
-const Div = styled.div``;
+const Div = styled.div`
+	white-space: pre-wrap;
+`;

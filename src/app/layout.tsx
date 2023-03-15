@@ -1,5 +1,6 @@
-import './globals.css';
 import StyledComponentsRegistry from './registry';
+
+import './globals.css';
 
 export const metadata = {
 	title: 'openAI',

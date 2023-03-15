@@ -30,7 +30,7 @@ const NavBar = styled.nav`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	width: 25vw;
+	width: 20vw;
 	padding: 10px;
 	background: #202123;
 `;

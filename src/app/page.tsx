@@ -5,6 +5,8 @@ import Image from 'next/image';
 import chat from '../../public/chat.svg';
 import image from '../../public/image.svg';
 import { useRouter } from 'next/navigation';
+import KaKaoAdFit from '@/components/KaKaoAdFit';
+import { useEffect } from 'react';
 
 /**
  * 해야할것들
@@ -17,8 +19,15 @@ export default function Home() {
 	const routerHandler = (path: string) => () => {
 		router.push(path);
 	};
+
 	return (
 		<Container>
+			<KaKaoAdFit
+				style={{ position: 'absolute', top: 0 }}
+				unit='DAN-r4fdMlSkfm0J8ESF'
+				width='728'
+				height='90'
+			/>
 			<ImageContainer>
 				<ImageBox onClick={routerHandler('/chat')}>
 					<Image
