@@ -6,7 +6,6 @@ import chat from '../../public/chat.svg';
 import image from '../../public/image.svg';
 import { useRouter } from 'next/navigation';
 import KaKaoAdFit from '@/components/KaKaoAdFit';
-import { useEffect } from 'react';
 import IFrameReject from './utills/iFrameReject';
 
 /**
