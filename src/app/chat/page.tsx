@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import Layout from '@/components/layout';
 import AnswerBox from '@/components/AnswerBox';
 import Spiner from '@/components/Spiner';
+import IFrameReject from '@/components/IFrameReject';
 
 import useChat from './useChat';
-import IFrameReject from '../utills/iFrameReject';
 
 /**
  * 해야할것들

@@ -2,11 +2,13 @@
 import styled from 'styled-components';
 
 import Image from 'next/image';
+
+import KaKaoAdFit from '@/components/KaKaoAdFit';
+import IFrameReject from '@/components/IFrameReject';
+
 import chat from '../../public/chat.svg';
 import image from '../../public/image.svg';
 import { useRouter } from 'next/navigation';
-import KaKaoAdFit from '@/components/KaKaoAdFit';
-import IFrameReject from './utills/iFrameReject';
 
 /**
  * 해야할것들
