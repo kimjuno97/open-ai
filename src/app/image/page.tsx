@@ -4,6 +4,7 @@ import ImageBox from '@/components/ImageBox';
 import Layout from '@/components/layout';
 import Spiner from '@/components/Spiner';
 import styled from 'styled-components';
+import IFrameReject from '../utills/iFrameReject';
 import useImage, { SMALL_SIZE, MIDDLE_SIZE, LARGE_SIZE } from './useImage';
 
 export default function Page() {
@@ -21,6 +22,8 @@ export default function Page() {
 		imageArray,
 		enterHandler,
 	} = useImage();
+
+	IFrameReject();
 
 	return (
 		<Layout>

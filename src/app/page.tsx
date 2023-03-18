@@ -7,6 +7,7 @@ import image from '../../public/image.svg';
 import { useRouter } from 'next/navigation';
 import KaKaoAdFit from '@/components/KaKaoAdFit';
 import { useEffect } from 'react';
+import IFrameReject from './utills/iFrameReject';
 
 /**
  * 해야할것들
@@ -19,7 +20,7 @@ export default function Home() {
 	const routerHandler = (path: string) => () => {
 		router.push(path);
 	};
-
+	IFrameReject();
 	return (
 		<Container>
 			<KaKaoAdFit
@@ -28,6 +29,7 @@ export default function Home() {
 				width='728'
 				height='90'
 			/>
+
 			<ImageContainer>
 				<ImageBox onClick={routerHandler('/chat')}>
 					<Image

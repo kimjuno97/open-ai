@@ -6,6 +6,7 @@ import AnswerBox from '@/components/AnswerBox';
 import Spiner from '@/components/Spiner';
 
 import useChat from './useChat';
+import IFrameReject from '../utills/iFrameReject';
 
 /**
  * 해야할것들
@@ -23,6 +24,8 @@ export default function Page() {
 		answerArray,
 		enterHandler,
 	} = useChat();
+
+	IFrameReject();
 
 	return (
 		<>
