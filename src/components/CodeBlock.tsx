@@ -9,9 +9,7 @@ interface TCodeBlockProps {
 export function CodeBlock({ language, value }: TCodeBlockProps) {
 	return (
 		<div style={{ padding: '0' }}>
-			<SyntaxHighlighter
-				language={language}
-				style={darcula}>
+			<SyntaxHighlighter language={language} style={darcula}>
 				{value}
 			</SyntaxHighlighter>
 		</div>

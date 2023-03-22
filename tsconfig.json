@@ -34,7 +34,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "/Users/kimjunho/Desktop/open-ai/.next/types/**/*.ts"
+    "/Users/kimjunho/Desktop/open-ai/.next/types/**/*.ts",
+    "/Users/kimjunho/Desktop/openAI/open-ai/.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

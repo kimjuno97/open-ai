@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
@@ -47,8 +46,4 @@ const ChatButton = styled.button`
 		background: #2b2c2f;
 	}
 	color: white;
-`;
-
-const PlusIcon = styled(Image)`
-	margin-right: 10px;
 `;

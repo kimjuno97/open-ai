@@ -3,13 +3,8 @@ import styled, { keyframes } from 'styled-components';
 export default function Spiner() {
 	return (
 		<SpinerDiv>
-			<svg className='svg'>
-				<circle
-					className='circle'
-					cx='50%'
-					cy='50%'
-					r='25%'
-				/>
+			<svg className="svg">
+				<circle className="circle" cx="50%" cy="50%" r="25%" />
 			</svg>
 		</SpinerDiv>
 	);

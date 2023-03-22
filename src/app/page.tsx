@@ -1,14 +1,13 @@
 'use client';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-import Image from 'next/image';
-
-import KaKaoAdFit from '@/components/KaKaoAdFit';
 import IFrameReject from '@/components/IFrameReject';
+import KaKaoAdFit from '@/components/KaKaoAdFit';
 
 import chat from '../../public/chat.svg';
 import image from '../../public/image.svg';
-import { useRouter } from 'next/navigation';
 
 /**
  * 해야할것들
@@ -26,24 +25,18 @@ export default function Home() {
 		<Container>
 			<KaKaoAdFit
 				style={{ position: 'absolute', top: 0 }}
-				unit='DAN-r4fdMlSkfm0J8ESF'
-				width='728'
-				height='90'
+				unit="DAN-r4fdMlSkfm0J8ESF"
+				width="728"
+				height="90"
 			/>
 
 			<ImageContainer>
 				<ImageBox onClick={routerHandler('/chat')}>
-					<Image
-						src={chat}
-						alt='chat'
-					/>
+					<Image src={chat} alt="chat" />
 					<P>gpt-3.5 Turbo</P>
 				</ImageBox>
 				<ImageBox onClick={routerHandler('/image')}>
-					<Image
-						src={image}
-						alt='image'
-					/>
+					<Image src={image} alt="image" />
 					<P>Image generation</P>
 				</ImageBox>
 			</ImageContainer>

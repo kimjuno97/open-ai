@@ -1,10 +1,10 @@
 'use client';
 import styled from 'styled-components';
 
-import Layout from '@/components/layout';
 import AnswerBox from '@/components/AnswerBox';
-import Spiner from '@/components/Spiner';
 import IFrameReject from '@/components/IFrameReject';
+import Layout from '@/components/layout';
+import Spiner from '@/components/Spiner';
 
 import useChat from './useChat';
 
@@ -38,10 +38,7 @@ export default function Page() {
 						onKeyDown={enterHandler}
 						autoFocus
 					/>
-					<Button
-						onClick={buttonHandler}
-						ref={buttonRef}
-						disabled={isLoading}>
+					<Button onClick={buttonHandler} ref={buttonRef} disabled={isLoading}>
 						{isLoading ? <Spiner /> : '전송'}
 					</Button>
 				</Form>

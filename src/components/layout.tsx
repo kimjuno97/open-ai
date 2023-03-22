@@ -1,7 +1,7 @@
-import Navbar from './navbar';
-import KaKaoAdFit from './KaKaoAdFit';
-
 import styled from 'styled-components';
+
+import KaKaoAdFit from './KaKaoAdFit';
+import Navbar from './navbar';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
@@ -9,9 +9,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<Navbar />
 			<KaKaoAdFit
 				style={{ position: 'absolute', top: 120 }}
-				unit='DAN-49xJT0N8IK7ahRFs'
-				width='160'
-				height='600'
+				unit="DAN-49xJT0N8IK7ahRFs"
+				width="160"
+				height="600"
 			/>
 			<Main>{children}</Main>
 		</>

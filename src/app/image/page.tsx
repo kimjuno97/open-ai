@@ -1,12 +1,12 @@
 'use client';
 import styled from 'styled-components';
 
+import IFrameReject from '@/components/IFrameReject';
 import ImageBox from '@/components/ImageBox';
 import Layout from '@/components/layout';
 import Spiner from '@/components/Spiner';
-import IFrameReject from '@/components/IFrameReject';
 
-import useImage, { SMALL_SIZE, MIDDLE_SIZE, LARGE_SIZE } from './useImage';
+import useImage, { LARGE_SIZE, MIDDLE_SIZE, SMALL_SIZE } from './useImage';
 
 export default function Page() {
 	const {
@@ -36,49 +36,46 @@ export default function Page() {
 					onKeyDown={enterHandler}
 					autoFocus
 				/>
-				<Button
-					onClick={buttonHandler}
-					ref={buttonRef}
-					disabled={isLoading}>
+				<Button onClick={buttonHandler} ref={buttonRef} disabled={isLoading}>
 					{isLoading ? <Spiner /> : '전송'}
 				</Button>
 			</Form>
 			<OptionsContainer>
 				<RadioWrap>
 					<input
-						type='radio'
-						id='small'
-						name='small'
+						type="radio"
+						id="small"
+						name="small"
 						value={SMALL_SIZE}
 						onChange={radioHandler}
 						checked={radioChecked.small}
 					/>
-					<Label htmlFor='small'>256x256</Label>
+					<Label htmlFor="small">256x256</Label>
 				</RadioWrap>
 				<RadioWrap>
 					<input
-						type='radio'
-						id='middle'
-						name='middle'
+						type="radio"
+						id="middle"
+						name="middle"
 						value={MIDDLE_SIZE}
 						onChange={radioHandler}
 						checked={radioChecked.middle}
 					/>
-					<Label htmlFor='middle'>512x512</Label>
+					<Label htmlFor="middle">512x512</Label>
 				</RadioWrap>
 				<RadioWrap>
 					<input
-						type='radio'
-						id='large'
-						name='large'
+						type="radio"
+						id="large"
+						name="large"
 						value={LARGE_SIZE}
 						onChange={radioHandler}
 						checked={radioChecked.large}
 					/>
-					<Label htmlFor='large'>1024x1024</Label>
+					<Label htmlFor="large">1024x1024</Label>
 				</RadioWrap>
 				<NumberInput
-					type='number'
+					type="number"
 					value={numberValue}
 					onChange={numberInputHandler}
 					min={1}

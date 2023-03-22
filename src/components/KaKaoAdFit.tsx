@@ -40,10 +40,7 @@ function KakaoAdFit({ unit, width, height, style = {} }: TKakaoAdFit) {
 	}, [height, unit, width]);
 	return (
 		<>
-			<aside
-				style={style}
-				className='aside__kakaoAdFit'
-			/>
+			<aside style={style} className="aside__kakaoAdFit" />
 		</>
 	);
 }

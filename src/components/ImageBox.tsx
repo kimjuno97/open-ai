@@ -11,10 +11,7 @@ export default function ImageBox({ imageArray }: TImageBox) {
 		<ImageBoxContainer>
 			{imageArray.map((src, idx) => (
 				<ImageContainer key={idx}>
-					<Image
-						src={src}
-						alt={`image${idx}`}
-					/>
+					<Image src={src} alt={`image${idx}`} />
 				</ImageContainer>
 			))}
 		</ImageBoxContainer>

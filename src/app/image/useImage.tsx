@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import blankValidation from '../utills/blankValidation';
+import React, { useRef, useState } from 'react';
+
 import imageController, { TImageSize } from '../../controller/imageController';
+import blankValidation from '../utills/blankValidation';
 
 export const SMALL_SIZE = '256x256';
 export const MIDDLE_SIZE = '512x512';
@@ -56,11 +57,7 @@ export default function useImage() {
 	const radioHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetValue = e.target.value;
 
-		if (
-			targetValue !== SMALL_SIZE &&
-			targetValue !== MIDDLE_SIZE &&
-			targetValue !== LARGE_SIZE
-		)
+		if (targetValue !== SMALL_SIZE && targetValue !== MIDDLE_SIZE && targetValue !== LARGE_SIZE)
 			return;
 		setRadioValue(targetValue);
 	};

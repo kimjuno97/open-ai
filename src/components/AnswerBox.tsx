@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { CodeBlock } from './CodeBlock';
+
 import { TchatProperty } from '@/controller/chatControlloer';
+
+import { CodeBlock } from './CodeBlock';
 
 interface TAnswerBoxProps {
 	answerArray: TchatProperty[];
@@ -30,22 +32,12 @@ export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
 							{stringContent}
 							{code.map((str, idx) => {
 								const codeStr = str.split('```')[1];
-								return (
-									<CodeBlock
-										key={idx}
-										language='javascript'
-										value={codeStr}
-									/>
-								);
+								return <CodeBlock key={idx} language="javascript" value={codeStr} />;
 							})}
 						</Div>
 					);
 				}
-				return (
-					<Div key={index}>
-						{`${role === 'user' ? 'QUESTION' : 'AI'} : ${contentArr}`}
-					</Div>
-				);
+				return <Div key={index}>{`${role === 'user' ? 'QUESTION' : 'AI'} : ${contentArr}`}</Div>;
 			})}
 		</Container>
 	);
