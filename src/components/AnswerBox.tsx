@@ -9,7 +9,7 @@ interface TAnswerBoxProps {
 	answerArray: TchatProperty[];
 }
 
-export default function AnswerBox({ answerArray }: TAnswerBoxProps) {
+export function AnswerBox({ answerArray }: TAnswerBoxProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		if (containerRef.current) {

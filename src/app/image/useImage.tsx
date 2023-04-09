@@ -21,7 +21,7 @@ export default function useImage() {
 	const [imageArray, setImageArray] = useState<Array<string>>([]);
 
 	const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		if (isLoading) return;
+		e.target.style.height = `${e.target.scrollHeight}px`;
 		setInputValue(e.target.value);
 	};
 
@@ -41,6 +41,7 @@ export default function useImage() {
 					});
 					setIsLoading(false);
 					setImageArray(prev => [...prev, ...answer]);
+					textAreaRef.current.style.height = 'auto';
 					setInputValue('');
 				} else {
 					setInputValue(availdValue);
@@ -81,6 +82,7 @@ export default function useImage() {
 				});
 				setIsLoading(false);
 				setImageArray(prev => [...prev, ...answer]);
+				textAreaRef.current.style.height = 'auto';
 				setInputValue('');
 			} else {
 				setInputValue(availdValue);

@@ -7,21 +7,25 @@ import blankValidation from '../utills/blankValidation';
 
 export default function useChat() {
 	const [inputValue, setInputValue] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+	const [answerArray, setAnswerArray] = useState<TchatProperty[]>([]);
+
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
-	const [answerArray, setAnswerArray] = useState<TchatProperty[]>([]);
-	const [isLoading, setIsLoading] = useState(false);
 
 	const inputHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		if (isLoading) return;
+		e.target.style.height = `${e.target.scrollHeight}px`;
 		setInputValue(e.target.value);
 	};
 
 	const enterHandler = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (!textAreaRef.current || isLoading) return;
+		if (e.key === 'Backspace') {
+			textAreaRef.current.style.height = 'auto';
+		}
 		if (e.shiftKey) return;
 		if (e.key === 'Enter') {
 			try {
-				if (!textAreaRef.current || isLoading) return;
 				const { availdValue, validation } = blankValidation(inputValue);
 				if (validation) {
 					const trimmedArr = answerArray.slice(-10);
@@ -30,6 +34,7 @@ export default function useChat() {
 					const { answer } = await chatController({ messages });
 					setIsLoading(false);
 					setAnswerArray(prev => [...prev, { role: 'user', content: inputValue }, answer]);
+					textAreaRef.current.style.height = 'auto';
 					setInputValue('');
 				} else {
 					setInputValue(availdValue);
@@ -59,6 +64,7 @@ export default function useChat() {
 				const { answer } = await chatController({ messages });
 				setIsLoading(false);
 				setAnswerArray(prev => [...prev, { role: 'user', content: inputValue }, answer]);
+				textAreaRef.current.style.height = 'auto';
 				setInputValue('');
 			} else {
 				setInputValue(availdValue);

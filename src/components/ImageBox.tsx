@@ -4,7 +4,7 @@ interface TImageBox {
 	imageArray: Array<string>;
 }
 
-export default function ImageBox({ imageArray }: TImageBox) {
+export function ImageBox({ imageArray }: TImageBox) {
 	if (imageArray.length === 0) return null;
 
 	return (

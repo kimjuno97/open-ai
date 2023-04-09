@@ -1,10 +1,7 @@
 'use client';
-import styled from 'styled-components';
 
-import AnswerBox from '@/components/AnswerBox';
-import IFrameReject from '@/components/IFrameReject';
-import Layout from '@/components/layout';
-import Spiner from '@/components/Spiner';
+import { AnswerBox, IFrameReject, Layout, Spiner } from '@/components';
+import { Button, Form, TextArea } from '@/styledComponents';
 
 import useChat from './useChat';
 
@@ -36,6 +33,7 @@ export default function Page() {
 						value={inputValue}
 						onChange={inputHandler}
 						onKeyDown={enterHandler}
+						disabled={isLoading}
 						autoFocus
 					/>
 					<Button onClick={buttonHandler} ref={buttonRef} disabled={isLoading}>
@@ -47,43 +45,3 @@ export default function Page() {
 		</>
 	);
 }
-
-const Form = styled.div`
-	display: flex;
-	justify-content: center;
-	gap: 5px;
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 10px;
-`;
-
-const TextArea = styled.textarea`
-	width: 80%;
-	height: 50px;
-	padding: 10px;
-	color: white;
-	background: #353640;
-	border-radius: 5px;
-	resize: none;
-	border: none;
-	:focus {
-		outline: none;
-	}
-`;
-
-const Button = styled.button`
-	border-radius: 5px;
-	cursor: pointer;
-	border: none;
-	color: white;
-	padding: 5px 10px;
-	background: #353640;
-	outline: none;
-	:focus,
-	:hover {
-		background: #202123;
-	}
-	:disabled {
-		cursor: no-drop;
-	}
-`;

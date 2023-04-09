@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-import KaKaoAdFit from './KaKaoAdFit';
-import Navbar from './navbar';
+import { KaKaoAdFit, Navbar } from '.';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<>
 			<Navbar />

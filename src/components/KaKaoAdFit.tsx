@@ -45,4 +45,4 @@ function KakaoAdFit({ unit, width, height, style = {} }: TKakaoAdFit) {
 	);
 }
 
-export default React.memo(KakaoAdFit);
+export const KaKakAdFitBanner = React.memo(KakaoAdFit);

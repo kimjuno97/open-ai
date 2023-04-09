@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-export default function Spiner() {
+export function Spiner() {
 	return (
 		<SpinerDiv>
 			<svg className="svg">

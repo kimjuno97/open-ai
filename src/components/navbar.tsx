@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-export default function Navbar() {
+export function Navbar() {
 	const router = useRouter();
 
 	const routerHandler = (path: string) => () => {

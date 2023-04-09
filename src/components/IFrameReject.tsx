@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function IFrameReject() {
+export function IFrameReject() {
 	useEffect(() => {
 		if (window) {
 			if (window.top !== window.self) {
