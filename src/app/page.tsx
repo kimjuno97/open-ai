@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-import IFrameReject from '@/components/IFrameReject';
-import KaKaoAdFit from '@/components/KaKaoAdFit';
+import { IFrameReject, KaKaoAdFit } from '@/components';
 
 import chat from '../../public/chat.svg';
 import image from '../../public/image.svg';
