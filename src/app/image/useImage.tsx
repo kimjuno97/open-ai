@@ -26,6 +26,10 @@ export default function useImage() {
 	};
 
 	const enterHandler = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (!textAreaRef.current || isLoading) return;
+		if (e.key === 'Backspace') {
+			textAreaRef.current.style.height = 'auto';
+		}
 		if (e.shiftKey) return;
 		if (e.key === 'Enter') {
 			try {
