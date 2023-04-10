@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const TextArea = styled.textarea`
 	width: 80%;
 	height: 50px;
+	max-height: 200px;
 	padding: 10px;
 	color: white;
 	background: #353640;
