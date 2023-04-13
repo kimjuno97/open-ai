@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { AnswerBox, IFrameReject, Layout, Spiner } from '@/components';
 import { Button, Form, TextArea } from '@/styledComponents';
 
@@ -24,9 +22,9 @@ export default function Page() {
 		enterHandler,
 	} = useChat();
 
-	useEffect(() => {
-		fetch('/api/hello').then(console.log);
-	}, []);
+	// useEffect(() => {
+	// 	// fetch('/api/papago', { method: 'POST' }).then(console.log);
+	// }, []);
 	IFrameReject();
 
 	return (
