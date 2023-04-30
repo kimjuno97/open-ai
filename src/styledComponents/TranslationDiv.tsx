@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const TextArea = styled.textarea`
-	width: 80%;
-	height: 50px;
-	max-height: 150px;
+export const TranslationDiv = styled.div`
+	width: 90%;
+	max-height: 100px;
+	margin-bottom: 20px;
 	padding: 10px;
 	color: white;
 	background: #353640;
@@ -11,6 +11,7 @@ export const TextArea = styled.textarea`
 	border-radius: 5px;
 	resize: none;
 	border: none;
+	overflow-y: auto;
 	:focus {
 		outline: none;
 	}
