@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { IFrameReject, KaKaoAdFit } from '@/components';
@@ -23,7 +22,7 @@ export default function Home() {
 
 	IFrameReject();
 
-	useEffect(() => alert('서비스 일시 정지'), []);
+	// useEffect(() => alert('서비스 일시 정지'), []);
 	return (
 		<Container>
 			<KaKaoAdFit

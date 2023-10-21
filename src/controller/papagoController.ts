@@ -1,13 +1,30 @@
-import axios from 'axios';
+import client from './axios';
 
-export interface TPapagoProperty {
+/**
+ * type 추가시 참고
+ * https://developers.naver.com/docs/papago/papago-nmt-api-reference.md
+ */
+type Ttranslation = 'ko' | 'en';
+export interface TPapagoTranslationProperty {
 	text: string;
-	source: string;
-	target: string;
+	source: Ttranslation;
+	target: Ttranslation;
 }
 
-const papagoController = async ({ text, source, target }: TPapagoProperty) => {
-	const { data } = await axios.post('/api/papago', {
+interface TPapagoTranslationResponse {
+	answer: string;
+}
+
+export interface TPapagoTranslationController {
+	(reqestData: TPapagoTranslationProperty): Promise<TPapagoTranslationResponse>;
+}
+
+const papagoTranslationController: TPapagoTranslationController = async ({
+	text,
+	source,
+	target,
+}) => {
+	const { data } = await client.post('/papago', {
 		text,
 		source,
 		target,
@@ -16,4 +33,4 @@ const papagoController = async ({ text, source, target }: TPapagoProperty) => {
 	return data;
 };
 
-export default papagoController;
+export default papagoTranslationController;

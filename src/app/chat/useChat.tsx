@@ -5,11 +5,24 @@ import chatController, { TchatProperty } from '@/controller/chatControlloer';
 
 import blankValidation from '../utills/blankValidation';
 
+/**
+	TODO: 디바운싱 로직을 챗에 끼어 넣었는데 다음과 같은 버그가 예상된다.
+	1. 디바운싱이 끝나지 않을때 질문하면 엉뚱한 질문이 갈 수 있다. 중간에 로딩 처리 필요
+	2. 애초에 서버 단에서 번역해서 질문하는게 어떨까?
+
+	2번케이스로 다음에 다시해보자.
+ */
+
 export default function useChat() {
 	const [inputValue, setInputValue] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
-	const [answerArray, setAnswerArray] = useState<TchatProperty[]>([]);
 
+	const [translationValue, setTranslationValue] = useState('');
+	const [translationToggle, setTranslationToggle] = useState(false);
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	const [answerArray, setAnswerArray] = useState<TchatProperty[]>([]);
+	console.log('번역된 값', translationValue);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -29,7 +42,11 @@ export default function useChat() {
 				const { availdValue, validation } = blankValidation(inputValue);
 				if (validation) {
 					const trimmedArr = answerArray.slice(-10);
-					const messages: TchatProperty[] = [...trimmedArr, { role: 'user', content: inputValue }];
+					const messages: TchatProperty[] = [
+						...trimmedArr,
+						{ role: 'user', content: translationToggle ? translationValue : inputValue },
+					];
+					console.log('뭘로 질문?', translationToggle ? translationValue : inputValue);
 					setIsLoading(true);
 					const { answer } = await chatController({ messages });
 					setIsLoading(false);
@@ -76,6 +93,11 @@ export default function useChat() {
 			setIsLoading(false);
 		}
 	};
+
+	const translationToggleHandler = () => {
+		setTranslationToggle(prev => !prev);
+	};
+
 	return {
 		textAreaRef,
 		inputValue,
@@ -85,5 +107,9 @@ export default function useChat() {
 		isLoading,
 		answerArray,
 		enterHandler,
+		setTranslationValue,
+		translationToggle,
+		translationToggleHandler,
+		translationValue,
 	};
 }

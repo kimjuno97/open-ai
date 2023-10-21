@@ -11,7 +11,12 @@ export interface TImageProperty {
 interface TopenAiRespose {
 	answer: Array<string>;
 }
-const imageController = async ({ prompt, n, size }: TImageProperty): Promise<TopenAiRespose> => {
+
+interface TImageController {
+	(reqestData: TImageProperty): Promise<TopenAiRespose>;
+}
+
+const imageController: TImageController = async ({ prompt, n, size }) => {
 	const { data }: { data: TopenAiRespose } = await client.post('/image', {
 		prompt,
 		n,
